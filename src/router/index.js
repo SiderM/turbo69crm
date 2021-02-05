@@ -1,27 +1,46 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import firebase from 'firebase'
+import { auth } from '@/firebase'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     meta: {
-      auth: true
+      requireAuth: true
     },
-    component: () => import('../views/Home')
+    component: () => import('@/views/Home')
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/incoms',
+    name: 'Incoms',
     meta: {
-      auth: true
+      requireAuth: true
     },
-    component: () => import('../views/About')
+    component: () => import('@/views/Incoms')
+  },
+  {
+    path: '/orders',
+    name: 'Orders',
+    meta: {
+      requireAuth: true
+    },
+    component: () => import('@/views/Orders')
+  },
+  {
+    path: '/site-settings',
+    name: 'SiteSettings',
+    meta: {
+      requireAuth: true
+    },
+    component: () => import('@/views/SiteSetting')
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login')
+    meta: {
+      requireAuth: false
+    },
+    component: () => import('@/views/Login')
   }
 ]
 
@@ -31,8 +50,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const currentUser = firebase.auth().currentUser
-  const requireAuth = to.matched.some(record => record.meta.auth)
+  const currentUser = auth.currentUser
+  const { requireAuth } = to.meta
 
   if (requireAuth && !currentUser) next({ name: 'Login' })
   else next()
