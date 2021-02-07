@@ -1,5 +1,8 @@
 <template>
-  <StageItem v-for="stage in stages" :key="stage.id" :stage="stage"/>
+  <div class="heading text-center font-bold text-2xl m-5 text-gray-800">Раздел с описанием услуг</div>
+  <div class="flex justify-center my-8">
+    <StageItem v-for="stage in stages" :key="stage.id" :stage="stage"/>
+  </div>
 </template>
 
 <script>

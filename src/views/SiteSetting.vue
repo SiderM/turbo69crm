@@ -1,6 +1,5 @@
 <template>
 <Dashboard>
-  <div>site setting page</div>
   <Stages/>
   <WorkPrices/>
 </Dashboard>

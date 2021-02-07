@@ -1,5 +1,8 @@
 <template>
-  <WorkPriceItem v-for="workprice in workPrices" :key="workprice.id" :workPrice="workprice"/>
+  <div class="heading text-center font-bold text-2xl m-5 text-gray-800">Раздел с карточками услуг</div>
+  <div class="flex justify-center my-8">
+    <WorkPriceItem v-for="workprice in workPrices" :key="workprice.id" :workPrice="workprice"/>
+  </div>
 </template>
 
 <script>

@@ -1,14 +1,20 @@
 <template>
-  <ul>
-    <li>
-      <input type="text" v-model="form.title"/>
-      <input type="text" v-model="form.price"/>
-      <input type="checkbox" v-model="form.popular"/>
-      <div>
-        <input class="border-2 border-red-500" type="text" v-for="(service, key) in form.services" :key="key" v-model="form.services[key]" />
-      </div>
-    </li>
-  </ul>
+  <div class="w-1/4 bg-white mx-3 flex flex-col rounded-md text-gray-800 border border-gray-300 p-4 shadow-md">
+    <label for="title" class="mb-2 font-medium">Название карточки</label>
+    <input id="title" v-model="form.title" class="bg-gray-50 rounded-md border border-gray-300 p-2 mb-4 outline-none"
+           spellcheck="false" placeholder="Название раздела..." type="text">
+    <label for="price" class="mb-2 font-medium">Стоимость</label>
+    <input id="price" v-model="form.price" class="bg-gray-50 rounded-md border border-gray-300 p-2 mb-4 outline-none"
+           spellcheck="false" placeholder="Стоимость услуги..." type="text">
+    <div class="inline mb-3">
+      <label for="popular" class="mb-2 font-medium mr-4">Сделать популярной</label>
+      <input id="popular" type="checkbox" v-model="form.popular"/>
+    </div>
+      <label for="services" class="mb-2 font-medium">Услуги в карточке</label>
+      <input id="services" v-for="(service, key) in form.services" :key="key"
+             v-model="form.services[key]" class="bg-gray-50 rounded-md border border-gray-300 p-2 mb-4 outline-none"
+             spellcheck="false" placeholder="Название раздела..." type="text">
+  </div>
 </template>
 
 <script>
