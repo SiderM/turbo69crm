@@ -7,9 +7,11 @@ import './assets/global.css'
 
 db.collection('incoms').onSnapshot(snapshot => {
   snapshot.docChanges().forEach(change => {
-    if (change.type === 'added') {
-      const audio = new Audio(require('@/assets/notification.mp3'))
-      audio.play()
+    if (change.doc.data().status === 'new') {
+      if (change.type === 'added') {
+        const audio = new Audio(require('@/assets/notification.mp3'))
+        audio.play()
+      }
     }
   })
 })
