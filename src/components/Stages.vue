@@ -1,5 +1,5 @@
 <template>
-  <StageItem v-for="stage in stages" :key="stage.id" :stage="stage" @updateStage="updateStage"/>
+  <StageItem v-for="stage in stages" :key="stage.id" :stage="stage"/>
 </template>
 
 <script>
@@ -21,14 +21,6 @@ export default {
             ...doc.data()
           })
         })
-      })
-    },
-    async updateStage (stage) {
-      await db.collection('stages').doc(stage.id).set({
-        title: stage.title,
-        text: stage.text,
-        img: stage.img,
-        link: stage.link
       })
     }
   },

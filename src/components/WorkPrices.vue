@@ -1,5 +1,5 @@
 <template>
-  <WorkPriceItem v-for="workprice in workPrices" :key="workprice.id" :workPrice="workprice" @updateWorkPrice="updateWorkPrice"/>
+  <WorkPriceItem v-for="workprice in workPrices" :key="workprice.id" :workPrice="workprice"/>
 </template>
 
 <script>
@@ -23,14 +23,6 @@ export default {
             }
           )
         })
-      })
-    },
-    async updateWorkPrice (workprice) {
-      await db.collection('workprice').doc(workprice.id).set({
-        title: workprice.title,
-        price: workprice.price,
-        services: workprice.services,
-        popular: workprice.popular
       })
     }
   },

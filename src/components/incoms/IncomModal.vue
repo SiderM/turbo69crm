@@ -18,9 +18,9 @@
             <p class="mr-4 mb-3"><span class="font-medium">Имя:</span> {{incom.phone}}</p>
           </div>
           <div>
-            <button @click="$emit('closeModal')" class="px-4 py-1 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Обзвонен</button>
-            <button @click="$emit('closeModal')" class="px-4 mx-3 py-1 border-green-500 border text-green-500 rounded transition duration-300 hover:bg-green-700 hover:text-white focus:outline-none">В заказы</button>
-            <button @click="$emit('closeModal')" class="px-4 py-1 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none">Отменить</button>
+            <button @click="setCalling" class="px-4 py-1 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Обзвонен</button>
+            <button @click="setInOrder" class="px-4 mx-3 py-1 border-green-500 border text-green-500 rounded transition duration-300 hover:bg-green-700 hover:text-white focus:outline-none">В заказы</button>
+            <button @click="setBreak" class="px-4 py-1 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none">Отменить</button>
           </div>
         </main>
       </div>
@@ -29,10 +29,26 @@
 </template>
 
 <script>
+import { db } from '@/firebase'
+
 export default {
   name: 'IncomModal',
   props: {
     incom: Object
+  },
+  methods: {
+    async setCalling () {
+      await db.collection('incoms').doc(this.incom.id).update({ status: 'calling' })
+      this.$emit('closeModal')
+    },
+    async setInOrder () {
+      await db.collection('incoms').doc(this.incom.id).update({ status: 'inOrder' })
+      this.$emit('closeModal')
+    },
+    async setBreak () {
+      await db.collection('incoms').doc(this.incom.id).update({ status: 'break' })
+      this.$emit('closeModal')
+    }
   }
 }
 </script>

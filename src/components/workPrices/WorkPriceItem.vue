@@ -1,17 +1,19 @@
 <template>
   <ul>
     <li>
-      <form @click.prevent>
-        <input type="text" v-model="form.title"/>
-        <input type="text" v-model="form.price"/>
-        <input type="text" v-model="form.popular"/>
-        <button @click="$emit('updateWorkPrice', form)">Update</button>
-      </form>
+      <input type="text" v-model="form.title"/>
+      <input type="text" v-model="form.price"/>
+      <input type="checkbox" v-model="form.popular"/>
+      <div>
+        <input class="border-2 border-red-500" type="text" v-for="(service, key) in form.services" :key="key" v-model="form.services[key]" />
+      </div>
     </li>
   </ul>
 </template>
 
 <script>
+import { db } from '@/firebase'
+
 export default {
   name: 'StagesItem',
   props: {
@@ -21,12 +23,16 @@ export default {
     form: {}
   }),
   created () {
-    this.form = {
-      id: this.workPrice.id,
-      title: this.workPrice.title,
-      price: this.workPrice.price,
-      services: this.workPrice.services,
-      popular: this.workPrice.popular
+    this.form = this.workPrice
+  },
+  watch: {
+    form: {
+      deep: true,
+      handler: function (val, oldVal) {
+        if (oldVal.id) {
+          db.collection('workprice').doc(val.id).update(this.form)
+        }
+      }
     }
   }
 }

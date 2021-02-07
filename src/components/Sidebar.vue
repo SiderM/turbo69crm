@@ -33,7 +33,7 @@
               </svg>
             </span>
             <span class="font-medium">Заявки</span>
-            <span class="ml-auto mr-6 text-sm bg-red-100 rounded-full px-3 py-px text-red-500">{{ newIncom.length }}</span>
+            <span v-show="newIncom.length > 0" class="ml-auto mr-6 text-sm bg-red-100 rounded-full px-3 py-px text-red-500">{{ newIncom.length }}</span>
           </router-link>
         </li>
         <li>
@@ -89,13 +89,13 @@ export default {
     async getNewIncom () {
       await db.collection('incoms').onSnapshot(snapshot => {
         this.newIncom = snapshot.docs.filter(doc => doc.data().status === 'new')
-        const audio = new Audio(require('../assets/notification.mp3'))
-        audio.play()
       })
     }
   },
   created () {
     this.getNewIncom()
+  },
+  updated () {
   }
 }
 </script>

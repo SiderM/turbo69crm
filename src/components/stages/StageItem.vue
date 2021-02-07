@@ -2,15 +2,16 @@
   <ul>
     <li>
       <input type="text" v-model="form.title"/>
-      <input type="text" v-model="form.text"/>
+      <textarea v-model="form.text"/>
       <input type="text" v-model="form.img"/>
       <input type="text" v-model="form.link"/>
-      <button class="text-blue-600" @click="$emit('updateStage', form)">Update</button>
     </li>
   </ul>
 </template>
 
 <script>
+import { db } from '@/firebase'
+
 export default {
   name: 'StagesItem',
   props: {
@@ -20,12 +21,16 @@ export default {
     form: {}
   }),
   created () {
-    this.form = {
-      id: this.stage.id,
-      title: this.stage.title,
-      text: this.stage.text,
-      img: this.stage.img,
-      link: this.stage.link
+    this.form = this.stage
+  },
+  watch: {
+    form: {
+      deep: true,
+      handler: function (val, oldVal) {
+        if (oldVal.id) {
+          db.collection('stages').doc(val.id).update(this.form)
+        }
+      }
     }
   }
 }

@@ -18,7 +18,7 @@ export default {
     incomsStat: {
       total: 0,
       calling: 0,
-      new: 0,
+      inOrder: 0,
       break: 0
     }
   }),
@@ -37,7 +37,7 @@ export default {
     },
     async getIncomsStat () {
       await db.collection('incoms').onSnapshot(snapshot => {
-        this.incomsStat.new = snapshot.docs.filter(doc => doc.data().status === 'new')
+        this.incomsStat.inOrder = snapshot.docs.filter(doc => doc.data().status === 'inOrder')
         this.incomsStat.calling = snapshot.docs.filter(doc => doc.data().status === 'calling')
         this.incomsStat.break = snapshot.docs.filter(doc => doc.data().status === 'break')
       })

@@ -27,6 +27,14 @@ const routes = [
     component: () => import('@/views/Orders')
   },
   {
+    path: '/clients',
+    name: 'Clients',
+    meta: {
+      requireAuth: true
+    },
+    component: () => import('@/views/Clients')
+  },
+  {
     path: '/site-settings',
     name: 'SiteSettings',
     meta: {

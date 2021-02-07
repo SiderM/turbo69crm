@@ -28,10 +28,10 @@
         </div>
         <div>
           <p class="mb-2 text-sm font-medium text-gray-600">
-            Новые
+            В заказах
           </p>
           <p class="text-lg font-semibold text-gray-700">
-            {{incomsStat.new.length}}
+            {{incomsStat.inOrder.length}}
           </p>
         </div>
       </div>
