@@ -2,9 +2,9 @@
   <ul>
     <li>
       <form @click.prevent>
-        <input type="text" v-model="form.title">
-        <input type="text" v-model="form.price">
-        <input type="text" v-model="form.popular">
+        <input type="text" v-model="form.title"/>
+        <input type="text" v-model="form.price"/>
+        <input type="text" v-model="form.popular"/>
         <button @click="$emit('updateWorkPrice', form)">Update</button>
       </form>
     </li>
@@ -31,7 +31,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

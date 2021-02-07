@@ -1,13 +1,11 @@
 <template>
   <ul>
     <li>
-      <form @click.prevent>
-      <input type="text" v-model="form.title">
-        <input type="text" v-model="form.text">
-        <input type="text" v-model="form.img">
-        <input type="text" v-model="form.link">
-        <button @click="$emit('updateStage', form)">Update</button>
-      </form>
+      <input type="text" v-model="form.title"/>
+      <input type="text" v-model="form.text"/>
+      <input type="text" v-model="form.img"/>
+      <input type="text" v-model="form.link"/>
+      <button class="text-blue-600" @click="$emit('updateStage', form)">Update</button>
     </li>
   </ul>
 </template>
@@ -32,7 +30,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
