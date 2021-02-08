@@ -1,7 +1,11 @@
 <template>
 <Dashboard>
   <IncomsStatistic :incomsStat="incomsStat"/>
-  <IncomsTable :incoms="incoms" />
+  <div class="flex justify-start my-5 items-center">
+    <label class="mx-3 font-medium text-lg">Намер телефона:</label>
+    <input class="bg-gray-50 py-2 px-3 w-56 outline-none rounded-md shadow-sm" placeholder="Введите номер телефона..." v-model="searchQuery" type="text">
+  </div>
+  <IncomsTable :incoms="filteredIncoms" />
 </Dashboard>
 </template>
 
@@ -20,8 +24,14 @@ export default {
       calling: 0,
       inOrder: 0,
       break: 0
-    }
+    },
+    searchQuery: ''
   }),
+  computed: {
+    filteredIncoms () {
+      return this.incoms.filter(i => i.phone.includes(this.searchQuery))
+    }
+  },
   methods: {
     async getIncoms () {
       await db.collection('incoms').orderBy('createAt', 'desc').onSnapshot(snapshot => {
